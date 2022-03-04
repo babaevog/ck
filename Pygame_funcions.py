@@ -152,17 +152,31 @@ def game_over():
         clock.tick(fps)
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN and event.key == pygame.K_r:
-                print(1)
+                restart()
+                dlc = False
             if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 dlc = False
                 pygame.quit()
         screen.blit(fon, fon_rect)
         printux('WASTED', width / 2, height / 2, 100)
-        printux('Press R to restart the game', width / 2, height / 2+100, 80)
+        printux('Press R to restart the game', width / 2, height / 2 + 100, 80)
         pygame.display.flip()
 
+
 def restart():
-    pass
+    global colvo, meteor_move, all_sprites, cucha_pulek, player
+    colvo = 0
+    meteor_move = pygame.sprite.Group()
+    all_sprites = pygame.sprite.Group()
+    cucha_pulek = pygame.sprite.Group()
+    player = Player()
+    all_sprites.add(player)
+    for m in range(0, 100):
+        meteor = Meteors()
+        all_sprites.add(meteor)
+        meteor_move.add(meteor)
+
+
 colvo = 0
 meteor_move = pygame.sprite.Group()
 all_sprites = pygame.sprite.Group()
